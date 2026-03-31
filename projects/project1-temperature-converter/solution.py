@@ -11,11 +11,24 @@
 
 celsius = float(input("Enter temperature in Celsius: "))
 
-# TODO: calculate fahrenheit using the formula F = (C × 9/5) + 32
-# fahrenheit = ...
+# calculate fahrenheit using the formula F = (C × 9/5) + 32
+fahrenheit = (celsius * 9/5) + 32
 
-# TODO: print the result using an f-string
-# print(f"...")
+# print the result using an f-string
+print(f"{celsius}°C is equal to {fahrenheit}°F")
 
 # ── Bonus (optional) ─────────────────────────────────────────────────────────
 # Add a direction menu (C→F or F→C)
+
+choice = input("Convert (C→F) or (F→C)? Enter C or F: ").upper()
+
+if choice == "C":
+    c = float(input("Enter temperature in Celsius: "))
+    f = (c * 9/5) + 32
+    print(f"{c}°C is equal to {f}°F")
+elif choice == "F":
+    f = float(input("Enter temperature in Fahrenheit: "))
+    c = (f - 32) * 5/9
+    print(f"{f}°F is equal to {c}°C")
+else:
+    print("Invalid choice!")
