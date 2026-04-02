@@ -1,5 +1,4 @@
 # Project 3 — Grade Calculator
-# Author: your name here
 
 scores = []
 

@@ -8,28 +8,54 @@ menu = {
     4: ("Bread",  2.00),
 }
 
-cart  = {}   # { item_name: quantity }
+cart = {}   # { item_name: quantity }
 total = 0.0
 
-# TODO: display the menu
-# print("--- Shop Menu ---")
-# for number, (name, price) in menu.items():
-#     print(f"{number}. {name:<10} ${price:.2f}")
-# print("5. Done")
+# display the menu
+print("Menu:")
+for key, (name, price) in menu.items():
+    print(f"{key}. {name} - ${price:.2f}")
+print("5. Checkout")
 
-# TODO: shopping loop
-# while True:
-#     choice = int(input("\nChoose an item (1-5): "))
-#     if choice == 5:
-#         break
-#     if choice in menu:
-#         ...add to cart, update total...
-#     else:
-#         print("Invalid choice, try again.")
+# shopping loop
+while True:
+    try:
+        choice = int(input("Choose an item (1-5): "))
 
-# TODO: print the receipt
-# print("\n--- Receipt ---")
-# for item, qty in cart.items():
-#     ...
-# print(f"Total: ${total:.2f}")
-# print("Thank you!")
+        if choice == 5:
+            break
+
+        if choice not in menu:
+            print("Invalid choice, try again.")
+            continue
+
+        item_name, price = menu[choice]
+
+        # ⭐ Bonus: ask quantity
+        quantity = int(input(f"How many {item_name}s? "))
+
+        # handle duplicate items
+        if item_name in cart:
+            cart[item_name] += quantity
+        else:
+            cart[item_name] = quantity
+
+        total += price * quantity
+
+        print(f"Added {quantity} x {item_name}")
+
+    except ValueError:
+        print("Please enter a valid number.")
+
+# apply discount
+if total > 5.0:
+    discount = total * 0.10
+    total -= discount
+    print("10% discount applied!")
+
+# print receipt
+print("\n--- Receipt ---")
+for item, qty in cart.items():
+    print(f"{item} x{qty}")
+
+print(f"Total: ${total:.2f}")
